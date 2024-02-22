@@ -12,5 +12,6 @@ for %%i in (samples\*.in) do (
         echo Success !output! !ans!
     )
 )
+
 del temp.out
 pause
