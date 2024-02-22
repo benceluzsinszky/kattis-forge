@@ -6,7 +6,7 @@ This script automates the setup of a new Kattis problem environment. It creates 
 
 ## Usage
 
-1. **Run the script**: Execute the script in your command line interface.
+1. **Run the script**: Execute `KattisForge.bat` or run it in your command line.
 
 2. **Setup the destination folder**: On the first run, you will be prompted to set up the destination folder. 
     - **Note**: The default location is `C:\Users\{username}\Documents\Kattis`. If you use OneDrive, you might want to use `C:\Users\{username}\OneDrive\Documents\Kattis` instead. You can always modify this path later in the `config.ini` file.
