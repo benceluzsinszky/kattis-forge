@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-for %%i in (sample\*.in) do (
+for %%i in (samples\*.in) do (
     python main.py < %%i > temp.out
-    fc /n temp.out %%~ni.ans > nul
+    fc /n temp.out samples\%%~ni.ans > nul
     set /p output=<temp.out
-    set /p ans=<%%~ni.ans
+    set /p ans=<samples\%%~ni.ans
     if errorlevel 1 (
         echo Fail !output! !ans!
     ) else (
