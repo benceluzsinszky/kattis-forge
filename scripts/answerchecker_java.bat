@@ -11,6 +11,9 @@ for %%i in (samples\*.in) do (
     ) else (
         echo Test !counter!: [92mSUCCESS^^![0m
     )
+
+    echo.
+    echo [94mExpected output[0m -^> Actual output
     echo.
 
     set /a ansCounter=0
@@ -25,7 +28,7 @@ for %%i in (samples\*.in) do (
     )
     for /l %%x in (1, 1, !ansCounter!) do (
         if "!ansLine[%%x]!"=="!outLine[%%x]!" (
-            echo !ansLine[%%x]! == !outLine[%%x]!
+            echo [94m!ansLine[%%x]![0m == !outLine[%%x]!
         ) else (
             echo --------------------------------------
             echo [91m!ansLine[%%x]! =\= !outLine[%%x]![0m
@@ -34,7 +37,7 @@ for %%i in (samples\*.in) do (
     )
     set /a counter+=1
     echo.
-    echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    echo ######################################
 )
 del temp.out
 pause
