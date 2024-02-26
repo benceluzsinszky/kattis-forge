@@ -46,10 +46,10 @@ mkdir "!output_path!\!problem_name!\samples" >nul 2>&1
 
 :: Copy scripts based on input
 if "!language!"=="Python" (
-    robocopy .\scripts "!output_path!\!problem_name!" main.py /xo >nul
+    robocopy .\scripts "!output_path!\!problem_name!" main.py /xn /xc /xo >nul
     copy /y .\scripts\answerchecker_python.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
 ) else (
-    robocopy .\scripts "!output_path!\!problem_name!" Main.java /xo >nul
+    robocopy .\scripts "!output_path!\!problem_name!" Main.java /xn /xc /xo >nul
     copy /y .\scripts\answerchecker_java.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
 )
 
