@@ -6,14 +6,35 @@ for %%i in (samples\*.in) do (
     echo Test !counter!
     java Main < %%i > temp.out
     fc /n temp.out samples\%%~ni.ans > nul
-    set /p output=<temp.out
-    set /p ans=<samples\%%~ni.ans
     if errorlevel 1 (
-        echo Fail ^| Expected: !ans! ^| Output: !output!
+        echo Test !counter!: [91mFAIL^^![0m
     ) else (
-        echo Success ^| Expected: !ans! ^| Output: !output!
+        echo Test !counter!: [92mSUCCESS^^![0m
+    )
+    echo.
+
+    set /a ansCounter=0
+    for /f "delims=" %%a in (samples\%%~ni.ans) do (
+        set /a ansCounter+=1
+        set "ansLine[!ansCounter!]=%%a"
+    )
+    set /a outCounter=0
+    for /f "delims=" %%a in (temp.out) do (
+        set /a outCounter+=1
+        set "outLine[!outCounter!]=%%a"
+    )
+    for /l %%x in (1, 1, !ansCounter!) do (
+        if "!ansLine[%%x]!"=="!outLine[%%x]!" (
+            echo !ansLine[%%x]! == !outLine[%%x]!
+        ) else (
+            echo --------------------------------------
+            echo [91m!ansLine[%%x]! =\= !outLine[%%x]![0m
+            echo --------------------------------------
+        )
     )
     set /a counter+=1
+    echo.
+    echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 )
 del temp.out
 pause
