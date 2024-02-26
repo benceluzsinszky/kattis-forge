@@ -18,6 +18,9 @@ if "!output_path!"=="" (
     echo output_path=!output_path! >> .\config.ini
 )
 
+:: Trim trailing spaces from output_path
+for /f "tokens=1* delims= " %%a in ("!output_path!") do set output_path=%%a
+
 :: Prompt for problem name
 set /p problem_name="Name of Kattis problem: "
 
@@ -38,15 +41,15 @@ if /i "!language!"=="J" (
 )
 
 :: Create problem and samples directories
-mkdir "!output_path!\!problem_name!"
-mkdir "!output_path!\!problem_name!\samples"
+mkdir "!output_path!\!problem_name!" >nul 2>&1
+mkdir "!output_path!\!problem_name!\samples" >nul 2>&1
 
 :: Copy scripts based on input
 if "!language!"=="Python" (
-    copy /y .\scripts\main.py "!output_path!\!problem_name!\main.py" >nul
+    robocopy .\scripts "!output_path!\!problem_name!" main.py /xo >nul
     copy /y .\scripts\answerchecker_python.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
 ) else (
-    copy /y .\scripts\Main.java "!output_path!\!problem_name!\Main.java" >nul
+    robocopy .\scripts "!output_path!\!problem_name!" Main.java /xo >nul
     copy /y .\scripts\answerchecker_java.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
 )
 
