@@ -26,7 +26,7 @@ set /p problem_name="Name of Kattis problem: "
 
 :: Prompt for setup language
 :promptLanguage
-set /p language="Python or Java for the setup (J/P)? "
+set /p language="Python, Go or Java for the setup (P/G/J)? "
 if /i "!language!"=="J" (
     set language=Java
 ) else if /i "!language!"=="java" (
@@ -35,6 +35,10 @@ if /i "!language!"=="J" (
     set language=Python
 ) else if /i "!language!"=="python" (
     set language=Python
+) else if /i "!language!"=="G" (
+    set language=Go
+) else if /i "!language!"=="go" (
+    set language=Go
 ) else (
     echo Invalid input, please try again.
     goto promptLanguage
@@ -48,9 +52,12 @@ mkdir "!output_path!\!problem_name!\samples" >nul 2>&1
 if "!language!"=="Python" (
     robocopy .\scripts "!output_path!\!problem_name!" main.py /xn /xc /xo >nul
     copy /y .\scripts\answerchecker_python.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
-) else (
+) else if "!language!"=="Java" (
     robocopy .\scripts "!output_path!\!problem_name!" Main.java /xn /xc /xo >nul
     copy /y .\scripts\answerchecker_java.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
+) else (
+        robocopy .\scripts "!output_path!\!problem_name!" main.go /xn /xc /xo >nul
+    copy /y .\scripts\answerchecker_go.bat "!output_path!\!problem_name!\answerchecker.bat" >nul
 )
 
 start "" "!output_path!\!problem_name!"
