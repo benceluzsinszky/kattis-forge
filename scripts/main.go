@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -12,5 +13,5 @@ func main() {
 
 	// Your code here
 
-	println("your output here")
+	fmt.Println("your output here")
 }
